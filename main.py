@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-from pydub import AudioSegment
-from pydub.playback import play
+import pygame
 import time
 
 
@@ -56,9 +55,15 @@ def text_to_morse(text):
     
 def play_morse_sound(text):
 
+    pygame.mixer.init()
+
     for letter in text:
-        sound = AudioSegment.from_mp3(f'/sounds/{letter}_morse_code_ogg.mp3')
-        play(sound)
+        pygame.mixer.music.load(f'sounds/{letter}_morse_code.ogg.mp3')
+        pygame.mixer.music.play()
+
+        while pygame.mixer.music.get_busy():
+            pygame.time.Clock().tick(10)
+
         time.sleep(1)
 
 

@@ -1,5 +1,9 @@
-from pydub import AudioSegment
-from pydub.playback import play
+import pygame
 
-song = AudioSegment.from_mp3("sounds/0_number_morse_code.ogg.mp3")
-play(song)
+pygame.mixer.init()
+
+pygame.mixer.music.load('sounds/0_number_morse_code.ogg.mp3')
+pygame.mixer.music.play()
+
+while pygame.mixer.music.get_busy():
+    pygame.time.Clock().tick(10)
