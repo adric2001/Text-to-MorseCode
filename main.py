@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-
+from pydub import AudioSegment
+from pydub.playback import play
 
 
 def text_to_morse(text):
@@ -52,7 +53,8 @@ def text_to_morse(text):
 
     return morse
     
-
+def play_morse_sound(text):
+    A = AudioSegment.from_wav("sounds/m n\")
 
 
 
@@ -60,7 +62,11 @@ def text_to_morse(text):
 def main():
     plain_text = input("Enter text you want to convert to Morse Code:")
     print(text_to_morse(plain_text))
-    print(f'Plain: {plain_text}')
+    print(f'Plain Text: {plain_text}')
+    playsound_choice = input("Would you like to play the sound? [Y or N]")
+    if playsound_choice.upper() == 'Y':
+
+
 
 
 if __name__ == "__main__":
