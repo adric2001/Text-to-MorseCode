@@ -49,7 +49,10 @@ def text_to_morse(text):
     morse = 'Morse Code: '
 
     for letter in text:
-        morse += conversion_table[letter.upper()]
+        if letter == ' ':
+            morse += ' '
+        else:
+            morse += conversion_table[letter.upper()]
 
     return morse
     
@@ -58,24 +61,35 @@ def play_morse_sound(text):
     pygame.mixer.init()
 
     for letter in text:
-        pygame.mixer.music.load(f'sounds/{letter}_morse_code.ogg.mp3')
-        pygame.mixer.music.play()
+        if letter == ' ':
+            time.sleep(2)
+        else:
+            pygame.mixer.music.load(f'sounds/{letter}_morse_code.ogg.mp3')
+            pygame.mixer.music.play()
 
-        while pygame.mixer.music.get_busy():
-            pygame.time.Clock().tick(10)
+            while pygame.mixer.music.get_busy():
+                pygame.time.Clock().tick(10)
 
-        time.sleep(1)
+            time.sleep(1)
 
 
 def main():
-    plain_text = input("Enter text you want to convert to Morse Code:")
-    print(text_to_morse(plain_text))
-    print(f'Plain Text: {plain_text}')
-    playsound_choice = input("Would you like to play the sound? [Y or N]")
-    if playsound_choice.upper() == 'Y':
-        play_morse_sound(plain_text)
-    else:
-        pass
+    still_running = True
+
+    while still_running:
+        plain_text = input("Enter text you want to convert to Morse Code:")
+        print(text_to_morse(plain_text))
+        print(f'Plain Text: {plain_text}')
+        playsound_choice = input("Would you like to play the sound? [Y or N]")
+        if playsound_choice.upper() == 'Y':
+            play_morse_sound(plain_text)
+        else:
+            pass
+        continue_choice = input("Would you like to convert another text to morse? [Y or N]")
+        if continue_choice.upper() == 'Y':
+            still_running = True
+        else:
+            still_running = False
         
 
 
