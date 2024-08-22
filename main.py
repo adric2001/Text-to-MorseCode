@@ -55,7 +55,8 @@ def text_to_morse(text):
             morse += conversion_table[letter.upper()]
 
     return morse
-    
+
+## Add ability to convert numbers into sounds
 def play_morse_sound(text):
 
     pygame.mixer.init()
@@ -72,7 +73,7 @@ def play_morse_sound(text):
 
             time.sleep(1)
 
-
+## Add ability to download morse code sound file
 def main():
     still_running = True
 
