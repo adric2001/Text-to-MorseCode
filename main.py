@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from pydub import AudioSegment
 from pydub.playback import play
+import time
 
 
 def text_to_morse(text):
@@ -54,9 +55,11 @@ def text_to_morse(text):
     return morse
     
 def play_morse_sound(text):
-    A = AudioSegment.from_wav("sounds/m n\")
 
-
+    for letter in text:
+        sound = AudioSegment.from_mp3(f'/sounds/{letter}_morse_code_ogg.mp3')
+        play(sound)
+        time.sleep(1)
 
 
 def main():
@@ -65,8 +68,10 @@ def main():
     print(f'Plain Text: {plain_text}')
     playsound_choice = input("Would you like to play the sound? [Y or N]")
     if playsound_choice.upper() == 'Y':
-
-
+        play_morse_sound(plain_text)
+    else:
+        pass
+        
 
 
 if __name__ == "__main__":
